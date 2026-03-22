@@ -6,7 +6,7 @@ Real LLM, real FileConversationStore, real EventBus.
 Streams EventLoopNode execution to a browser via WebSocket.
 
 Usage:
-    cd /home/timothy/oss/hive/core
+    cd {PROJECT_ROOT}/core
     python demos/event_loop_wss_demo.py
 
     Then open http://localhost:8765 in your browser.

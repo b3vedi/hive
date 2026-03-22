@@ -21,7 +21,7 @@ Features demonstrated:
 - max_node_visits for feedback loop control
 
 Usage:
-    cd /home/timothy/oss/hive/core
+    cd {PROJECT_ROOT}/core
     python demos/github_outreach_demo.py
 
     Then open http://localhost:8768 in your browser.

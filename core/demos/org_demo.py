@@ -11,7 +11,7 @@ UI shows the chat stream alongside a real-time SVG graph with
 active-node glow and message-edge animation.
 
 Usage:
-    cd /home/timothy/oss/hive/core
+    cd {PROJECT_ROOT}/core
     python demos/org_demo.py
 
     Then open http://localhost:8767 in your browser.

@@ -9,7 +9,7 @@ Real LLM, real FileConversationStore, real EventBus.
 Streams both nodes to a browser via WebSocket.
 
 Usage:
-    cd /home/timothy/oss/hive/core
+    cd {PROJECT_ROOT}/core
     python demos/handoff_demo.py
 
     Then open http://localhost:8766 in your browser.

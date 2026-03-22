@@ -4,7 +4,7 @@ FULL CALL PATH: FRONTEND SESSION START TO AGENT EXECUTION
 STEP 1: FRONTEND HTTP REQUEST (API ENTRY POINT)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/server/routes_sessions.py
+FILE: {PROJECT_ROOT}core/framework/server/routes_sessions.py
 ENDPOINT: POST /api/sessions (line 103)
 FUNCTION: async def handle_create_session(request: web.Request) -> web.Response
 
@@ -24,7 +24,7 @@ handle_create_session (line 103)
 STEP 2: SESSION CREATION (MANAGER LAYER)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/server/session_manager.py
+FILE: {PROJECT_ROOT}core/framework/server/session_manager.py
 
 FLOW A: Create Session with Worker (Single Step)
 ─────────────────────────────────────────────────
@@ -75,7 +75,7 @@ create_session (line 109)
 STEP 3: WORKER AGENT LOADING (AGENT RUNNER LAYER)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/runner/runner.py
+FILE: {PROJECT_ROOT}core/framework/runner/runner.py
 
 FUNCTION: AgentRunner.load() (line 789) - Static method
 CALLED BY: _load_worker_core() via loop.run_in_executor() (line 213-220)
@@ -116,7 +116,7 @@ NOTE: __init__ does NOT call _setup() yet — that happens later.
 STEP 4: WORKER RUNTIME SETUP (AFTER LOAD)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/runner/runner.py
+FILE: {PROJECT_ROOT}core/framework/runner/runner.py
 
 FUNCTION: runner._setup(event_bus=None) (line 1012)
 CALLED BY: _load_worker_core() via loop.run_in_executor() (line 225-227)
@@ -149,9 +149,9 @@ _setup(event_bus=session.event_bus) (line 1012)
 STEP 5: AGENT RUNTIME CREATION (CORE RUNTIME INSTANTIATION)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/runner/runner.py
+FILE: {PROJECT_ROOT}core/framework/runner/runner.py
           (method _setup_agent_runtime, line 1299)
-          & /Users/timothy/repo/hive/core/framework/runtime/agent_runtime.py
+          & {PROJECT_ROOT}core/framework/runtime/agent_runtime.py
           (function create_agent_runtime, line 1642)
 
 FUNCTION: runner._setup_agent_runtime() (line 1299)
@@ -216,7 +216,7 @@ RETURN: AgentRuntime instance (NOT YET STARTED)
 STEP 6: AGENT RUNTIME INITIALIZATION (RUNTIME CLASS)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/runtime/agent_runtime.py
+FILE: {PROJECT_ROOT}core/framework/runtime/agent_runtime.py
 
 FUNCTION: AgentRuntime.__init__() (line 118)
 
@@ -253,7 +253,7 @@ FUNCTION: AgentRuntime.register_entry_point() (line 218)
 STEP 7: QUEEN STARTUP (CONCURRENT WITH WORKER)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/server/session_manager.py
+FILE: {PROJECT_ROOT}core/framework/server/session_manager.py
 
 FUNCTION: _start_queen() (line 394)
 CALLED BY: create_session() OR create_session_with_worker()
@@ -292,7 +292,7 @@ RESULT: Queen task starts in background, never awaited
 STEP 8: WORKER RUNTIME START
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/runtime/agent_runtime.py
+FILE: {PROJECT_ROOT}core/framework/runtime/agent_runtime.py
 
 FUNCTION: AgentRuntime.start() (line 263)
 CALLED BY: _load_worker_core() [line 234 in session_manager.py]
@@ -332,7 +332,7 @@ RESULT: AgentRuntime ready to execute
 STEP 9: TRIGGER EXECUTION (MANUAL VIA ENTRY POINT)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/runtime/agent_runtime.py
+FILE: {PROJECT_ROOT}core/framework/runtime/agent_runtime.py
 
 FUNCTION: async def trigger() (line 790)
 CALLED BY: Frontend API, timers, webhooks, manual calls
@@ -355,7 +355,7 @@ RETURNS: execution_id (non-blocking)
 STEP 10: EXECUTION STREAM MANAGEMENT
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/runtime/execution_stream.py
+FILE: {PROJECT_ROOT}core/framework/runtime/execution_stream.py
 
 FUNCTION: ExecutionStream.execute() (line 426)
 CALLED BY: AgentRuntime.trigger() [line 825]
@@ -398,7 +398,7 @@ RESULT: Execution queued, _run_execution() runs in background
 STEP 11: EXECUTION RUNNER (BACKGROUND TASK)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/runtime/execution_stream.py
+FILE: {PROJECT_ROOT}core/framework/runtime/execution_stream.py
 
 FUNCTION: ExecutionStream._run_execution() (line 538)
 CALLED BY: asyncio.create_task() [line 508]
@@ -467,7 +467,7 @@ RESULT: Execution complete, event emitted, task ends
 STEP 12: GRAPH EXECUTION (THE ACTUAL AGENT LOGIC)
 ===================================================================
 
-FILE: /Users/timothy/repo/hive/core/framework/graph/executor.py
+FILE: {PROJECT_ROOT}core/framework/graph/executor.py
 
 FUNCTION: GraphExecutor.execute() (line 289)
 CALLED BY: ExecutionStream._run_execution() [line 644]
@@ -588,13 +588,13 @@ Memory Flow:
 KEY FILE PATHS AND LINE NUMBERS
 ===================================================================
 
-1. API Entry: /Users/timothy/repo/hive/core/framework/server/routes_sessions.py:103
-2. Session Manager: /Users/timothy/repo/hive/core/framework/server/session_manager.py:128
-3. Agent Runner Load: /Users/timothy/repo/hive/core/framework/runner/runner.py:789
-4. Agent Runner Setup: /Users/timothy/repo/hive/core/framework/runner/runner.py:1012
-5. Runtime Creation: /Users/timothy/repo/hive/core/framework/runtime/agent_runtime.py:1642
-6. Runtime Class: /Users/timothy/repo/hive/core/framework/runtime/agent_runtime.py:66
-7. Trigger Method: /Users/timothy/repo/hive/core/framework/runtime/agent_runtime.py:790
-8. Execution Stream: /Users/timothy/repo/hive/core/framework/runtime/execution_stream.py:134
-9. Graph Executor: /Users/timothy/repo/hive/core/framework/graph/executor.py:102
-10. Main Loop: /Users/timothy/repo/hive/core/framework/graph/executor.py:596
+1. API Entry: {PROJECT_ROOT}core/framework/server/routes_sessions.py:103
+2. Session Manager: {PROJECT_ROOT}core/framework/server/session_manager.py:128
+3. Agent Runner Load: {PROJECT_ROOT}core/framework/runner/runner.py:789
+4. Agent Runner Setup: {PROJECT_ROOT}core/framework/runner/runner.py:1012
+5. Runtime Creation: {PROJECT_ROOT}core/framework/runtime/agent_runtime.py:1642
+6. Runtime Class: {PROJECT_ROOT}core/framework/runtime/agent_runtime.py:66
+7. Trigger Method: {PROJECT_ROOT}core/framework/runtime/agent_runtime.py:790
+8. Execution Stream: {PROJECT_ROOT}core/framework/runtime/execution_stream.py:134
+9. Graph Executor: {PROJECT_ROOT}core/framework/graph/executor.py:102
+10. Main Loop: {PROJECT_ROOT}core/framework/graph/executor.py:596
